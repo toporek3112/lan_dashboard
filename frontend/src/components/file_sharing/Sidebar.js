@@ -5,7 +5,7 @@ function Sidebar({ folders, onFolderSelect }) {
   return (
     <div className="sidebar rgb-1">
       {folders.map(folder => (
-        <Folder folder={folder} onFolderSelect={onFolderSelect}/>
+        <Folder key={folder.name} folder={folder} onFolderSelect={onFolderSelect} />
       ))}
     </div>
   );

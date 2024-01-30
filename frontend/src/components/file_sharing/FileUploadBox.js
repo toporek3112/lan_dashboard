@@ -19,7 +19,7 @@ const FileUploadBox = ({ selectedFiles, onFileSelect, onUpload }) => {
   };
 
   return (
-    <div className='file-upload-wraper'>
+    <div className='file-upload-wrapper'>
       <div>
         <div 
           onDragOver={handleDragOver}

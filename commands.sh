@@ -9,12 +9,12 @@ sudo systemctl enable nfs-kernel-server
 # /etc/exports
 /srv/nfs *(rw,sync,no_subtree_check,insecure)
 # /etc/fstab (optional)
-IP_ADDRESS:/srv/nfs /nfs nfs defaults 0 0
+192.168.178.140:/srv/nfs /nfs nfs defaults 0 0
 
 # after editing /etc/fstab (permanent mount)
 sudo mount -a # also can be added to bashrc
 # or just a onetime mount (has to be repeated after every restart)
-sudo mount -t nfs IP_ADDRESS:/srv/nfs /nfs -o vers=3
+sudo mount -t nfs 192.168.178.140:/srv/nfs /nfs -o vers=3
 
 # generate cert for https
 openssl genrsa -out file-sharing-pwa.key 2048 # private key

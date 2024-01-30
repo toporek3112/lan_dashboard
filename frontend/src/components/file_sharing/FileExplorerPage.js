@@ -1,24 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import FileUploadBox from './FileUploadBox';
 import Sidebar from './Sidebar';
 import FileExplorer from './FileExplorer';
 
 const FileExplorerPage = () => {
+  const navigate = useNavigate();
+  const { folderPath } = useParams();
+  const [folders, setFolders] = useState([]);
+  const [files, setFiles] = useState([]);
+
   // to be used for upload logic
   const [selectedFiles, setSelectedFiles] = useState([]);
   
-  const [currentPath, setCurrentPath] = useState('nfs')
-  const [selectedFolder, setSelectedFolder] = useState({path: "./"});
-  const [folders, setFolders] = useState([]);
-  const [files, setFiles] = useState([]);
-  
   // const [folderContents, setFolderContents] = useState([]); // Dummy contents
-
+  console.log(folderPath);
   useEffect(() => {
     const fetchFolderContents = async () => {
       try {
-        const encodedFolderPath = encodeURIComponent(selectedFolder.path);
-        const response = await fetch(`http://IP_ADDRESS:3002/getFolderContents/${encodedFolderPath}`);
+        const encodedFolderPath = encodeURIComponent(folderPath);
+        const response = await fetch(`http://192.168.178.140:3002/getFolderContents/${encodedFolderPath}`);
         
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -38,12 +39,13 @@ const FileExplorerPage = () => {
     };
   
     fetchFolderContents();
-  }, [selectedFolder]);
+  }, [folderPath]);
 
   const onFolderSelect = (folder) => {
-    setSelectedFolder(folder)
-    setCurrentPath(`nfs/${folder.path}`)
-  }
+    const newPath = `${folderPath}/${folder.name}`
+    const encodedPath = encodeURIComponent(newPath);
+    navigate(`/folder/${encodedPath}`);
+  };
 
   const handleUpload = async () => {
     if (!selectedFiles || selectedFiles.length === 0) {
@@ -59,7 +61,7 @@ const FileExplorerPage = () => {
     console.log(formData);
 
     try {
-      const response = await fetch('http://IP_ADDRESS:3002/upload', {
+      const response = await fetch('http://192.168.178.140:3002/upload', {
         method: 'POST',
         body: formData,
         headers: {
@@ -78,16 +80,9 @@ const FileExplorerPage = () => {
   };
 
   return (
-    // <div className='App-content'>
-    //   <FileUploadBox
-    //     selectedFiles={selectedFiles}
-    //     onFileSelect={handleFileSelect}
-    //     onUpload={handleUpload} />
-    // </div>
-
     <div className="file-explorer-container">
       <Sidebar folders={folders} onFolderSelect={onFolderSelect} />
-      <FileExplorer files={files} currentPath={currentPath} />
+      <FileExplorer files={files} currentPath={folderPath} />
     </div>
   );
 };

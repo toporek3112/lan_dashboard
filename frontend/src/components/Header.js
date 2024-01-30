@@ -4,8 +4,8 @@ import '../css/App.css'
 
 const Header = () => {
   return (
-    <div className='header rgb-1'>
-      <h3 style={{margin: '10px 0', color: 'white'}}>
+    <div className='header-container rgb-1'>
+      <h3 className='header'>
         File explorer
       </h3>
     </div>

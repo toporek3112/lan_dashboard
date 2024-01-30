@@ -11,7 +11,7 @@ const File = ({ file }) => {
   };
 
   return (
-    <div className="file-wraper" key={file.name} title={file.name}>
+    <div className="file-wrapper" key={file.name} title={file.name}>
       <img src={icon} alt="PDF icon" className="file-icon" />
       <p className="file-name">
         {croppedFileName(file.name)}

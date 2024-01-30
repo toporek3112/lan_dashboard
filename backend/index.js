@@ -41,7 +41,7 @@ const upload = multer({ storage: storage });
 
 app.get('/getFolderContents/:folderName?', async (req, res) => {
   const folderName = req.params.folderName == undefined ? '' : req.params.folderName;
-  const folderPath = path.join('/srv/nfs/', folderName); // Adjust the base path as necessary
+  const folderPath = path.join('/srv/', folderName); // Adjust the base path as necessary
   logger.info(`Folder Contents request for path ${folderPath}`);
 
   try {

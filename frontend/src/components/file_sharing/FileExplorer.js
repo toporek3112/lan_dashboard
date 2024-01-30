@@ -6,7 +6,7 @@ function FileExplorer({ files, currentPath }) {
   return (
     <div className="file-explorer rgb-white" key='folderContents'>
       <h2 className='current-path'>{currentPath}</h2>
-      <div className='files-wraper'>
+      <div className='files-wrapper'>
         {files.map(file => (
           <File file={file} />
         ))}

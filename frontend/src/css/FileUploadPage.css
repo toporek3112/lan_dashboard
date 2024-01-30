@@ -1,13 +1,20 @@
 /* Header */
-.header {
+.header-container {
   text-align: center;
   font-size: 24px;
   width: 100%; 
 }
 
+.header {
+  color: white;
+  margin: 0;
+  padding: 10px;
+}
+
 .file-explorer-container {
   display: flex;
   flex-grow: 1;
+  height: 100vh;
 }
 
 
@@ -19,7 +26,7 @@
 }
 
 /* Folders */
-.folder-wraper {
+.folder-wrapper {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -30,7 +37,7 @@
   cursor: pointer;
 }
 
-.folder-wraper:hover {
+.folder-wrapper:hover {
   background-color:  rgb(101, 119, 145);
   border-radius: 10px;
   transition: 0.8s;
@@ -46,7 +53,7 @@
   font-size: 18px;
   margin-left: 10px;
   text-align: center;
-  color: black;
+  color: white;
 }
 
 
@@ -66,13 +73,13 @@
   border-bottom: solid black 1px;
 }
 
-.files-wraper {
+.files-wrapper {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
 
-.file-wraper {
+.file-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -82,7 +89,7 @@
   margin: 10px;
 }
 
-.file-wraper:hover {
+.file-wrapper:hover {
   background-color:  rgb(213, 227, 245);
   border-radius: 10px;
   transition: 0.8s;
@@ -104,7 +111,7 @@
 
 
 
-.file-upload-wraper {
+.file-upload-wrapper {
   display: 'flex'; 
   flex-direction: 'column'; 
   align-items: 'center'; 
