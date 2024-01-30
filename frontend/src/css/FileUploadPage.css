@@ -1,0 +1,155 @@
+/* Header */
+.header {
+  text-align: center;
+  font-size: 24px;
+  width: 100%; 
+}
+
+.file-explorer-container {
+  display: flex;
+  flex-grow: 1;
+}
+
+
+/* Sidebar */
+.sidebar {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Folders */
+.folder-wraper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  height: 40px;
+  margin: 5px;
+  padding: 0px 5px;
+  cursor: pointer;
+}
+
+.folder-wraper:hover {
+  background-color:  rgb(101, 119, 145);
+  border-radius: 10px;
+  transition: 0.8s;
+}
+
+.folder-icon {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 5px;
+}
+
+.folder-name {
+  font-size: 18px;
+  margin-left: 10px;
+  text-align: center;
+  color: black;
+}
+
+
+
+/* Files */
+.file-explorer {
+  flex-grow: 1;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+}
+
+.current-path {
+  text-align: left;
+  margin: 10px;
+  border-bottom: solid black 1px;
+}
+
+.files-wraper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.file-wraper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 120px;
+  height: 120px;
+  margin: 10px;
+}
+
+.file-wraper:hover {
+  background-color:  rgb(213, 227, 245);
+  border-radius: 10px;
+  transition: 0.8s;
+}
+
+.file-icon {
+  width: 45px;
+  height: 45px;
+  margin-bottom: 5px;
+}
+
+.file-name {
+  font-size: 10px;
+  margin: 0;
+  text-align: center;
+  color: black;
+}
+
+
+
+
+.file-upload-wraper {
+  display: 'flex'; 
+  flex-direction: 'column'; 
+  align-items: 'center'; 
+  justify-content: 'center'; 
+  height: '100vh';
+}
+
+.file-upload-field {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Creates columns with a minimum width of 100px */
+  border: 2px white;
+  padding: 10px;
+  background-color: rgba(68, 68, 68, 0.22);
+  width: 300px;
+  height: 300px;
+  text-align: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  transition: background-color 1s; 
+  border-radius: 10px;
+}
+
+.file-grid {
+  grid-gap: 10px; /* Space between grid items */
+  width: 100%; /* Ensure the grid container takes full width of its parent */
+  padding: 10px;
+}
+
+
+.file-upload-field:hover {
+  background-color: rgba(40, 44, 52, 0.6); 
+}
+
+.file-upload-button {
+  background-color: #007bffcb;
+  color: white; 
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  width: 60%;
+  transition: background-color 1s;
+}
+
+.file-upload-button:hover {
+  background-color: #007bff; 
+}

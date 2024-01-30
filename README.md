@@ -1,2 +1,6 @@
-# lan_file_sharing
-File sharing - Raspbarry Pi - Web App - Mobile App
+# LAN Dashboard
+
+Dashboard for my LAN projects
+
+- [ ] PWA
+- [ ] File sharing
