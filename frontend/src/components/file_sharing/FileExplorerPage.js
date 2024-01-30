@@ -80,7 +80,7 @@ const FileExplorerPage = () => {
   };
 
   return (
-    <div className="file-explorer-container">
+    <div className="file-explorer-container rgb-1">
       <Sidebar folders={folders} onFolderSelect={onFolderSelect} />
       <FileExplorer files={files} currentPath={folderPath} />
     </div>
