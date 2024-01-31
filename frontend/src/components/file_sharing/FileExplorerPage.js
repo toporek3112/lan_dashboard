@@ -5,13 +5,15 @@ import Sidebar from './Sidebar';
 import FileExplorer from './FileExplorer';
 
 const FileExplorerPage = () => {
+  // Navigation / React Router
   const navigate = useNavigate();
   const { folderPath } = useParams();
+
   const [folders, setFolders] = useState([]);
   const [files, setFiles] = useState([]);
+  const [uploadCount, setUploadCount] = useState(0);
 
   // const [folderContents, setFolderContents] = useState([]); // Dummy contents
-  console.log(folderPath);
   useEffect(() => {
     const fetchFolderContents = async () => {
       try {
@@ -36,7 +38,7 @@ const FileExplorerPage = () => {
     };
   
     fetchFolderContents();
-  }, [folderPath]);
+  }, [folderPath, uploadCount]);
 
   const onFolderSelect = (folder) => {
     const newPath = `${folderPath}/${folder.name}`
@@ -44,10 +46,14 @@ const FileExplorerPage = () => {
     navigate(`/folder/${encodedPath}`);
   };
 
+  const onUploadSuccess = () => {
+    setUploadCount(uploadCount => uploadCount + 1)
+  }
+
   return (
     <div className="file-explorer-container rgb-1">
       <Sidebar folders={folders} onFolderSelect={onFolderSelect} />
-      <FileExplorer files={files} currentPath={folderPath} />
+      <FileExplorer files={files} currentPath={folderPath} onUploadSuccess={onUploadSuccess} />
     </div>
   );
 };

@@ -1,10 +1,7 @@
 import React, { useState, useRef } from 'react';
 import File from './File';
 
-function FileExplorer({ files, currentPath }) {
-  const [selectedFiles, setSelectedFiles] = useState([]);
-  const [uploadFiles, setUploadFiles] = useState([]);
-
+function FileExplorer({ files, currentPath, onUploadSuccess }) {
   const fileInputRef = useRef(null);
 
   const handleFilesSelected = (event) => {
@@ -16,7 +13,6 @@ function FileExplorer({ files, currentPath }) {
       status: 'uploading' // Initial status
     }));
 
-    setUploadFiles(newFiles);
     newFiles.forEach(file => handleUpload(file));
   };
 
@@ -26,11 +22,9 @@ function FileExplorer({ files, currentPath }) {
       return;
     }
 
+    // Inizialize new FormData object and append the file to it
     const formData = new FormData();
     formData.append('file', file.fileObject);
-
-    // console.log(`Uploading ${file.name} to ${currentPath}`)
-    console.log(formData);
 
     try {
       const response = await fetch(`http://192.168.178.140:3002/upload?path=${encodeURIComponent(currentPath)}`, {
@@ -39,32 +33,17 @@ function FileExplorer({ files, currentPath }) {
       });
 
       if (response.ok) {
-        // Update the status to 'success'
-        file.status = 'success'
-        // updateFileStatus(file.file, 'success');
-      } else {
-        // Update the status to 'error'
-        file.status = 'error'
-        // updateFileStatus(file.file, 'error');
+        onUploadSuccess();
+        alert('File Upload: Successfull :)');
       }
+      else {
+        alert('File Upload: Failed :(');
+      }
+
     } catch (error) {
-        file.status = 'error'
-        // updateFileStatus(file.file, 'error');
+        alert(error);
     }
   };
-
-  // const updateFileStatus = (file, status) => {
-  //   setUploadFiles(prev => prev.map(f => 
-  //     f.file === file ? { ...f, status: status } : f
-  //   ));
-  
-  //   if (status === 'error') {
-  //     // Remove the file from the list after 3 seconds if there's an error
-  //     setTimeout(() => {
-  //       setUploadFiles(prev => prev.filter(f => f.file !== file));
-  //     }, 3000);
-  //   }
-  // };
 
   return (
     <div className="file-explorer rgb-white">
@@ -79,7 +58,12 @@ function FileExplorer({ files, currentPath }) {
           style={{ display: 'none' }}
         />
         {/* Clickable wrapper for file input */}
-        <div className='file-wrapper' style={{ fontSize: '30px' }} onClick={() => fileInputRef.current.click()}>
+        <div 
+          className='file-wrapper' 
+          style={{ fontSize: '30px' }} 
+          onClick={() => fileInputRef.current.click()}
+          title='Add File'
+        >
           <p>+</p>
         </div>
         {files.map((file, index) => (
