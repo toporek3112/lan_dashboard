@@ -43,7 +43,7 @@ const FileExplorerPage = () => {
   const onFolderSelect = (folder) => {
     const newPath = `${folderPath}/${folder.name}`
     const encodedPath = encodeURIComponent(newPath);
-    navigate(`/folder/${encodedPath}`);
+    navigate(`/file-explorer/folder/${encodedPath}`);
   };
 
   const onUploadSuccess = () => {

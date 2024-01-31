@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Header from './Header';
 import FileExplorerPage from './file_sharing/FileExplorerPage';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import HomePage from './Homepage/HomePage';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import '../css/App.css';
 
 function App() {
@@ -9,8 +10,9 @@ function App() {
     <Router>
       <Header />
       <Routes>
-        <Route path="/" element={<FileExplorerPage />} />
-        <Route path="/folder/:folderPath" element={<FileExplorerPage />} />
+        <Route path="/" element={<Navigate replace to="/homepage" />} />
+        <Route path="/homepage" element={<HomePage />} />
+        <Route path="/file-explorer/folder/:folderPath" element={<FileExplorerPage />} />
       </Routes>
     </Router>
   );

@@ -77,10 +77,25 @@ app.post('/upload', (req, res) => {
     }
 
     // Everything went fine.
-    console.log(`File uploaded to ${req.body.path}`);
+    logger.info(`File uploaded to ${req.body.path}`);
     res.status(200).send('File uploaded successfully');
   });
 });
+
+// Download
+app.get('/download', (req, res) => {
+  const filePath = req.query.filePath;
+  const absolutePath = path.join('/srv/', filePath)
+  logger.info(`File download: ${absolutePath}`)
+
+  res.download(absolutePath, (err) => {
+    if (err) {
+      // Handle error, but don't expose internal error to client
+      res.status(500).send("Error occurred while downloading");
+    }
+  });
+});
+
 
 // Standart page
 app.get('/', (req, res) => {

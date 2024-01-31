@@ -10,8 +10,26 @@ const File = ({ file }) => {
     return len > maxChar ? name.substring(0, maxChar) + '...' + name.substring(len-8, len) : name;
   };
 
+  const handleDownload = async () => {
+    const response = await fetch(`http://192.168.178.140:3002/download?filePath=${encodeURIComponent(file.path)}`);
+    if (response.ok) {
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = file.name;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      a.remove();
+    } else {
+      // Handle error
+      console.error('Error downloading file.');
+    }
+  };
+
   return (
-    <div className="file-wrapper" title={file.name}>
+    <div className="file-wrapper" title={file.name} onClick={handleDownload}>
       {file.status === 'uploading' && <p>Uploading...</p>}
       {file.status === 'success' && (
         <>
