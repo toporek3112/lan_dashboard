@@ -160,3 +160,53 @@
 .file-upload-button:hover {
   background-color: #007bff; 
 }
+
+
+@media only screen and (max-width: 600px) {
+  .sidebar {
+    width: 100px;
+  }
+
+  /* Folders */
+  .folder-wrapper {
+    flex-direction: column;
+    height: 80px;
+  }
+
+  .folder-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 5px;
+  }
+  
+  .folder-name {
+    font-size: 15px;
+    margin: 0px;
+    text-align: center;
+  }
+
+  .file-wrapper {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+  }
+  
+  .file-wrapper:hover {
+    background-color:  rgb(213, 227, 245);
+    border-radius: 10px;
+    transition: 0.8s;
+  }
+  
+  .file-icon {
+    width: 45px;
+    height: 45px;
+    margin-bottom: 5px;
+  }
+  
+  .file-name {
+    font-size: 10px;
+    margin: 0;
+    text-align: center;
+    color: black;
+  }
+}

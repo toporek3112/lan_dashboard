@@ -10,9 +10,6 @@ const FileExplorerPage = () => {
   const [folders, setFolders] = useState([]);
   const [files, setFiles] = useState([]);
 
-  // to be used for upload logic
-  const [selectedFiles, setSelectedFiles] = useState([]);
-  
   // const [folderContents, setFolderContents] = useState([]); // Dummy contents
   console.log(folderPath);
   useEffect(() => {
@@ -45,38 +42,6 @@ const FileExplorerPage = () => {
     const newPath = `${folderPath}/${folder.name}`
     const encodedPath = encodeURIComponent(newPath);
     navigate(`/folder/${encodedPath}`);
-  };
-
-  const handleUpload = async () => {
-    if (!selectedFiles || selectedFiles.length === 0) {
-      alert('Please select a file first!');
-      return;
-    }
-
-    const formData = new FormData();
-    selectedFiles.forEach(file => {
-      formData.append('files', file); // 'files' is the key that the server will read from
-    });
-
-    console.log(formData);
-
-    try {
-      const response = await fetch('http://192.168.178.140:3002/upload', {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json',
-        },
-      });
-
-      if (response.ok) {
-        console.log('Files uploaded successfully');
-      } else {
-        console.error('Upload failed:', response);
-      }
-    } catch (error) {
-      console.error('Error uploading files:', error);
-    }
   };
 
   return (

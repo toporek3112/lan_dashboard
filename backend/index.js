@@ -21,17 +21,19 @@ const PORT = 3002;
 // Enable CORS for all routes
 app.use(cors());
 
-// Configure multer for file storage
+// Configure Multer
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, '/srv//nfs/uploads'); // Change this to your desired upload directory
+  destination: function(req, file, cb) {
+    // You can determine the destination dynamically
+    const destPath = path.join('/srv/', req.query.path);
+    cb(null, destPath);
   },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname); // Use the original file name
+  filename: function(req, file, cb) {
+    cb(null, file.originalname);
   }
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({ storage: storage }).single('file');
 
 
 
@@ -52,7 +54,8 @@ app.get('/getFolderContents/:folderName?', async (req, res) => {
       return {
         name: fileName,
         type: stats.isDirectory() ? 'directory' : 'file',
-        path: path.join(folderName, fileName) // Relative path from the base folder
+        path: path.join(folderName, fileName), // Relative path from the base folder
+        status: 'success'
       };
     }));
     return res.json(filesWithTypes);
@@ -62,14 +65,21 @@ app.get('/getFolderContents/:folderName?', async (req, res) => {
   }
 });
 
-// Upload endpoint
-app.post('/upload', upload.array('files'), (req, res) => {
-  if (!req.files) {
-    logger.error('No files were uploaded.');
-    return res.status(400).send('No files were uploaded.');
-  }
-  logger.info(`Uploaded ${req.files.length} files.`);
-  return res.status(200).send('Files uploaded successfully.');
+// Now, handle the files
+app.post('/upload', (req, res) => {
+  upload(req, res, function (err) {
+    if (err instanceof multer.MulterError) {
+      // A Multer error occurred when uploading.
+      return res.status(500).json(err);
+    } else if (err) {
+      // An unknown error occurred when uploading.
+      return res.status(500).json(err);
+    }
+
+    // Everything went fine.
+    console.log(`File uploaded to ${req.body.path}`);
+    res.status(200).send('File uploaded successfully');
+  });
 });
 
 // Standart page
