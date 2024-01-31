@@ -1,5 +1,5 @@
 import React from 'react';
-import { ReactComponent as FolderIcon } from '../../img/icon-folder.svg';
+import { ReactComponent as FolderIcon } from '../../img/icons8-folder-150.svg';
 import '../../css/FileUploadPage.css';
 
 const File = ({ folder, onFolderSelect }) => {

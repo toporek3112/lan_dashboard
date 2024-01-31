@@ -46,7 +46,7 @@ function FileExplorer({ files, currentPath, onUploadSuccess }) {
   };
 
   return (
-    <div className="file-explorer rgb-white">
+    <div className={'file-explorer rgb-white'}>
       <h2 className='current-path'>{currentPath}</h2>
       <div className='files-wrapper'>
         {/* Invisible file input */}
