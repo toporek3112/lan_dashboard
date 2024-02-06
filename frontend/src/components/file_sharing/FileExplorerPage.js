@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import FileUploadBox from './FileUploadBox';
 import Sidebar from './Sidebar';
 import FileExplorer from './FileExplorer';
+import { fetchFolderContents } from './ffetch';
 
 const FileExplorerPage = () => {
   // Navigation / React Router
@@ -15,29 +16,7 @@ const FileExplorerPage = () => {
 
   // const [folderContents, setFolderContents] = useState([]); // Dummy contents
   useEffect(() => {
-    const fetchFolderContents = async () => {
-      try {
-        const encodedFolderPath = encodeURIComponent(folderPath);
-        const response = await fetch(`http://192.168.178.140:3002/getFolderContents/${encodedFolderPath}`);
-        
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        
-        const contents = await response.json();
-        
-        // seperate folders and files
-        const folders = contents.filter(content => content.type === 'directory');
-        const files = contents.filter(content => content.type === 'file');
-        console.log(contents);
-        setFolders(folders);
-        setFiles(files);
-      } catch (error) {
-        console.error('Error fetching folder contents:', error);
-      }
-    };
-  
-    fetchFolderContents();
+    fetchFolderContents(folderPath, setFolders, setFiles);
   }, [folderPath, uploadCount]);
 
   const onFolderSelect = (folder) => {

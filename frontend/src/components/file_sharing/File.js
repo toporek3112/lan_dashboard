@@ -1,5 +1,6 @@
 import React from 'react';
 import icon from '../../img/icon_file.png';
+import { downloadFile } from './ffetch';
 import '../../css/FileUploadPage.css'
 
 const File = ({ file }) => {
@@ -11,21 +12,7 @@ const File = ({ file }) => {
   };
 
   const handleDownload = async () => {
-    const response = await fetch(`http://192.168.178.140:3002/download?filePath=${encodeURIComponent(file.path)}`);
-    if (response.ok) {
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = file.name;
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(url);
-      a.remove();
-    } else {
-      // Handle error
-      console.error('Error downloading file.');
-    }
+    downloadFile(file)
   };
 
   return (

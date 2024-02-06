@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../../css/HomePage.css'
 import { ReactComponent as FolderIcon } from '../../img/icon-folder.svg';
+import '../../css/HomePage.css'
 
 const HomePage = () => {
   const navigate = useNavigate();

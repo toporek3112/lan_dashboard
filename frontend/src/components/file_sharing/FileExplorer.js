@@ -1,5 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import File from './File';
+import { uploadFile } from './ffetch';
 
 function FileExplorer({ files, currentPath, onUploadSuccess }) {
   const fileInputRef = useRef(null);
@@ -22,27 +23,7 @@ function FileExplorer({ files, currentPath, onUploadSuccess }) {
       return;
     }
 
-    // Inizialize new FormData object and append the file to it
-    const formData = new FormData();
-    formData.append('file', file.fileObject);
-
-    try {
-      const response = await fetch(`http://192.168.178.140:3002/upload?path=${encodeURIComponent(currentPath)}`, {
-        method: 'POST',
-        body: formData
-      });
-
-      if (response.ok) {
-        onUploadSuccess();
-        alert('File Upload: Successfull :)');
-      }
-      else {
-        alert('File Upload: Failed :(');
-      }
-
-    } catch (error) {
-        alert(error);
-    }
+    await uploadFile(file, currentPath, onUploadSuccess)
   };
 
   return (

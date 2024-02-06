@@ -84,9 +84,12 @@ app.post('/upload', (req, res) => {
 
 // Download
 app.get('/download', (req, res) => {
-  const filePath = req.query.filePath;
-  const absolutePath = path.join('/srv/', filePath)
-  logger.info(`File download: ${absolutePath}`)
+  let filePath = req.query.filePath;
+  // Basic sanitization to remove potentially malicious path segments
+  filePath = filePath.replace(/(\.\.\/?)/g, '');
+  
+  const absolutePath = path.join('/srv/', filePath);
+  logger.info(`File download request: ${absolutePath}`);
 
   res.download(absolutePath, (err) => {
     if (err) {
