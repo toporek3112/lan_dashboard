@@ -26,3 +26,13 @@ export HTTPS=true
 export SSL_CRT_FILE=/home/toporek3112/lan_file_sharing/my-nfs-app/src/certs/file-sharing-pwa.crt
 export SSL_KEY_FILE=/home/toporek3112/lan_file_sharing/my-nfs-app/src/certs/file-sharing-pwa.key
 npm start
+
+##################################################
+##################### DOCKER #####################
+##################################################
+# frontend
+# docker build -t 311200/lan_dashboard_frontend:latest -f dockerfile .
+
+# backend
+docker build -t 311200/lan_dashboard_backend:latest -f dockerfile .
+
